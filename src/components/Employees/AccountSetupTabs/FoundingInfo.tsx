@@ -1,6 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { FoundingInfoType } from "../../../types";
+
+import {
+  industryTypeOptions,
+  organizationTypeOptions,
+  teamSizeOptions,
+} from "../../../utils/constants";
+import CustomDropDown from "../../common/CustomDropDown";
 
 interface Props {
   data: FoundingInfoType;
@@ -35,39 +41,26 @@ export const FoundingInfo: React.FC<Props> = ({ data, onChange }) => {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <select
-          className="p-2 border rounded"
+        <CustomDropDown
           value={form.organizationType}
           onChange={(e) => handleChange(e, "organizationType")}
-        >
-          <option value="">Select Organization Type</option>
-          <option value="Private">Private</option>
-          <option value="Public">Public</option>
-          <option value="Nonprofit">Nonprofit</option>
-        </select>
+          options={organizationTypeOptions}
+          placeholder="Select Organization Type"
+        />
 
-        <select
-          className="p-2 border rounded"
+        <CustomDropDown
           value={form.industryType}
           onChange={(e) => handleChange(e, "industryType")}
-        >
-          <option value="">Select Industry</option>
-          <option value="Technology">Technology</option>
-          <option value="Finance">Finance</option>
-          <option value="Healthcare">Healthcare</option>
-        </select>
+          options={industryTypeOptions}
+          placeholder="Select Industry"
+        />
 
-        <select
-          className="p-2 border rounded"
+        <CustomDropDown
           value={form.teamSize}
           onChange={(e) => handleChange(e, "teamSize")}
-        >
-          <option value="">Select Team Size</option>
-          <option value="1-10">1-10</option>
-          <option value="11-50">11-50</option>
-          <option value="51-200">51-200</option>
-          <option value="200+">200+</option>
-        </select>
+          options={teamSizeOptions}
+          placeholder="Select Team Size"
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

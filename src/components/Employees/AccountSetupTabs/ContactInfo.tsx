@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ChevronDown, Mail } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { Countries } from "../../../utils/constants";
 
 interface ContactInfoType {
   mapLocation: string;
@@ -14,13 +15,6 @@ interface Props {
   onChange: (data: ContactInfoType, isValid: boolean) => void;
   onPrevious?: () => void;
 }
-
-const countries = [
-  { code: "+1", label: "US", flag: "🇺🇸" },
-  { code: "+44", label: "UK", flag: "🇬🇧" },
-  { code: "+91", label: "IN", flag: "🇮🇳" },
-  { code: "+880", label: "BD", flag: "🇧🇩" },
-];
 
 export const ContactInfo: React.FC<Props> = ({ data, onChange }) => {
   const [form, setForm] = useState(data);
@@ -63,13 +57,13 @@ export const ContactInfo: React.FC<Props> = ({ data, onChange }) => {
             onClick={() => setShowDropdown(!showDropdown)}
           >
             <span className="mr-1">
-              {countries.find((c) => c.code === form.phoneCode)?.flag || "🌐"}
+              {Countries.find((c) => c.code === form.phoneCode)?.flag || "🌐"}
             </span>
             <span>{form.phoneCode}</span>
             <ChevronDown className="w-4 h-4 ml-1" />
             {showDropdown && (
               <div className="absolute left-0 z-10 bg-white border rounded shadow top-10 w-28">
-                {countries.map((c) => (
+                {Countries.map((c) => (
                   <div
                     key={c.code}
                     className="px-2 py-1 cursor-pointer hover:bg-gray-100"
