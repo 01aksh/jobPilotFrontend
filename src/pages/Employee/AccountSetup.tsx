@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
+import Button from "../../components/common/Button";
 import { CompanyInfo } from "../../components/Employees/AccountSetupTabs/CompanyInfo";
 import { ContactInfo } from "../../components/Employees/AccountSetupTabs/ContactInfo";
 import { FoundingInfo } from "../../components/Employees/AccountSetupTabs/FoundingInfo";
@@ -99,7 +100,7 @@ const AccountSetup = () => {
 
   const handleFinalSubmit = async () => {
     console.log(formData);
-    
+
     try {
       const response = await submitAccountSetup(formData);
       console.log("Success:", response);
@@ -144,37 +145,34 @@ const AccountSetup = () => {
           />
         )}
       </div>
-
       <div className="flex justify-start mt-6 space-x-4">
         {currentStep > 0 && currentStep < 4 && (
-          <button
-            className="px-6 py-2 text-black bg-gray-200 rounded"
+          <Button
+            className="text-black bg-gray-200"
             onClick={() => setCurrentStep(currentStep - 1)}
           >
             Previous
-          </button>
+          </Button>
         )}
 
         {currentStep < 3 && (
-          <button
-            className="px-6 py-2 text-white bg-blue-700 rounded"
-            disabled={!stepValidation[currentStep]}
+          <Button
+            className="text-white bg-blue-700"
             onClick={handleSaveAndNextClickButton}
+            disabled={!stepValidation[currentStep]}
           >
             Save & Next
-          </button>
+          </Button>
         )}
 
         {currentStep === 3 && (
-          <button
-            className="px-6 py-2 text-white bg-blue-700 rounded"
+          <Button
+            className="text-white bg-blue-700"
+            onClick={handleFinalSubmit}
             disabled={!stepValidation[currentStep]}
-            onClick={() => {
-              handleFinalSubmit();
-            }}
           >
             Finish Editing
-          </button>
+          </Button>
         )}
       </div>
     </div>

@@ -1,23 +1,3 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-}
-
-export interface ApiResponse<T> {
-  data: T;
-  status: number;
-  message: string;
-  success: boolean;
-}
-
-export type RouteType = {
-  path: string;
-  element: React.ReactNode;
-  children?: RouteType[];
-};
-
 export interface CompanyInfoType {
   logo: File | null;
   banner: File | null;
