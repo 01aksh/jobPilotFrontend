@@ -29,3 +29,10 @@ export interface ContactInfoType {
   phoneNumber: string;
   email: string;
 }
+
+export interface EmployeeDetailType {
+  companyInfo: CompanyInfoType;
+  foundingInfo: FoundingInfoType;
+  socialMediaInfo: SocialMediaType;
+  contactInfo: ContactInfoType;
+}

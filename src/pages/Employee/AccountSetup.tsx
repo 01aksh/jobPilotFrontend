@@ -14,6 +14,7 @@ import {
   FoundingInfoType,
   SocialMediaType,
 } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 interface FormDataType {
   companyInfo: CompanyInfoType;
@@ -23,6 +24,7 @@ interface FormDataType {
 }
 
 const AccountSetup = () => {
+  const navigate = useNavigate();
   // const [currentStep, setCurrentStep] = useState(0);
   const { currentStep, setCurrentStep, stepValidation, setStepValidation } =
     useProgress();
@@ -103,8 +105,14 @@ const AccountSetup = () => {
 
     try {
       const response = await submitAccountSetup(formData);
-      console.log("Success:", response);
-      alert("Submitted successfully!");
+      console.log("Success:", response.data);
+      alert(
+        response.data.message ||
+          "Employee account setup submitted successfully!"
+      );
+      if (response) {
+        navigate(`/employee-details/${response.data._id}`);
+      }
     } catch (error: any) {
       console.error("Error submitting Employee account setup:", error);
       alert("Failed to submit emplloyee account setup.");
