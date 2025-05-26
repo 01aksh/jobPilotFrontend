@@ -4,8 +4,9 @@ import { useProgress } from "../../contexts/ProgressContext";
 import { Logo } from "./Logo";
 
 export const Header = () => {
+  const location = window.location.pathname;
   const { currentStep, stepValidation } = useProgress();
-  const [maxProgress, setMaxProgress] = useState(0); 
+  const [maxProgress, setMaxProgress] = useState(0);
 
   const currentProgress = stepValidation[currentStep]
     ? ((currentStep + 1) / 4) * 100
@@ -16,6 +17,8 @@ export const Header = () => {
       setMaxProgress(currentProgress);
     }
   }, [currentProgress]);
+
+  console.log(location);
 
   console.log(
     "Current:",
@@ -39,25 +42,29 @@ export const Header = () => {
       </div>
 
       <div className="flex flex-col w-1/3 px-10 space-y-2">
-        <div className="flex justify-between mb-2">
-          <p className="text-sm text-gray-500">Setup Progress</p>
-          {maxProgress > 0 && (
-            <p className="text-sm font-medium text-blue-600">
-              {`${Math.round(maxProgress)}% Completed`}
-            </p>
-          )}
-        </div>
+        {location === "/" && (
+          <>
+            <div className="flex justify-between mb-2">
+              <p className="text-sm text-gray-500">Setup Progress</p>
+              {maxProgress > 0 && (
+                <p className="text-sm font-medium text-blue-600">
+                  {`${Math.round(maxProgress)}% Completed`}
+                </p>
+              )}
+            </div>
 
-        <div className="w-full h-2 bg-gray-200 rounded">
-          <div
-            className={`h-2 rounded transition-all duration-300 ${
-              maxProgress > 0 ? "bg-blue-600" : "bg-blue-100"
-            }`}
-            style={{
-              width: `${Math.round(maxProgress)}%`,
-            }}
-          ></div>
-        </div>
+            <div className="w-full h-2 bg-gray-200 rounded">
+              <div
+                className={`h-2 rounded transition-all duration-300 ${
+                  maxProgress > 0 ? "bg-blue-600" : "bg-blue-100"
+                }`}
+                style={{
+                  width: `${Math.round(maxProgress)}%`,
+                }}
+              ></div>
+            </div>
+          </>
+        )}
       </div>
     </header>
   );
